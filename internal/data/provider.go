@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"sort"
 	"strconv"
+
+	"gofr.dev/pkg/gofr/logging"
 )
 
 //go:embed resources/input.txt
@@ -21,9 +23,9 @@ func (p *TextDataProvider) Input() []uint64 {
 	return p.inputSlice
 }
 
-func NewTextDataProvider() (*TextDataProvider, error) {
+func NewTextDataProvider(logger logging.Logger) (*TextDataProvider, error) {
 
-	slice, err := loadInput(inputTxtBytes)
+	slice, err := loadInput(logger, inputTxtBytes)
 
 	if err != nil {
 		return nil, err
@@ -34,7 +36,8 @@ func NewTextDataProvider() (*TextDataProvider, error) {
 	}, nil
 }
 
-func loadInput(input []byte) ([]uint64, error) {
+func loadInput(logger logging.Logger, input []byte) ([]uint64, error) {
+	logger.Debug("Loading input data")
 	scanner := bufio.NewScanner(bytes.NewReader(input))
 
 	slice := []uint64{}
@@ -58,5 +61,6 @@ func loadInput(input []byte) ([]uint64, error) {
 		return nil, fmt.Errorf("Input is not sorted")
 	}
 
+	logger.Info("Input data loaded successfully")
 	return slice, nil
 }
