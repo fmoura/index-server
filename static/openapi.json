@@ -1,0 +1,100 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Index Service",
+    "description": "",
+    "contact": {
+      "email": "feduardomoura@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080"
+    }
+  ],
+  "tags": [
+    {
+      "name": "index",
+      "description": "Search for indexes"
+    }
+  ],
+  "paths": {
+    "/index/{value}": {
+      "get": {
+        "tags": [
+          "index"
+        ],
+        "summary": "Gets the data index for a given number",
+        "description": "Get the data index for a given number",
+        "operationId": "getIndex",
+        "parameters": [
+          {
+            "name": "value",
+            "in": "path",
+            "description": "Status values that need to be considered for filter",
+            "required": true,
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IndexResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid value"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IndexResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/InnerIndexResponse"
+          }
+        }
+      },
+      "InnerIndexResponse": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "value": {
+            "type": "integer",
+            "format": "uint64",
+            "example": 198772
+          },
+          "error messsage": {
+            "type": "string",
+            "example": "Value not found"
+          }
+        },
+        "required": [
+          "index",
+          "value"
+        ]
+      }
+    }
+  }
+}
