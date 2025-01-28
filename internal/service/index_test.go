@@ -21,7 +21,7 @@ type IndexServiceSuite struct {
 	service  *IndexService
 }
 
-func TestDataServiceSuite(t *testing.T) {
+func TestIndexServiceSuite(t *testing.T) {
 	suite.Run(t, new(IndexServiceSuite))
 }
 
@@ -88,14 +88,6 @@ func newMockDataProvider() *MockDataProvider {
 	provider.On("Input").Return([]uint64{0, 100, 200, 300, 400, 500})
 
 	return provider
-}
-
-func (m *MockDataProvider) Unset(methodName string) {
-	for _, call := range m.ExpectedCalls {
-		if call.Method == methodName {
-			call.Unset()
-		}
-	}
 }
 
 func (m *MockDataProvider) Input() []uint64 {

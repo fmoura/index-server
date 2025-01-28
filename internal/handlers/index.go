@@ -2,35 +2,59 @@ package handlers
 
 import (
 	"strconv"
-	"strings"
 
 	"gofr.dev/pkg/gofr"
 	"gofr.dev/pkg/gofr/http"
 )
 
+const (
+	valuePathParamName = "value"
+	IndexValuePath     = "/index/{value}"
+)
+
+type IndexService interface {
+	SearchIndex(value uint64) (index int, actualValue uint64, found bool)
+}
+
 type IndexResponse struct {
-	Index        int64  `json:"index"`
-	Value        int    `json:"value"`
+	Index int    `json:"index"`
+	Value uint64 `json:"value"`
+}
+
+type IndexNotFoundResponse struct {
+	Index        int    `json:"index"`
+	Value        uint64 `json:"value"`
 	ErrorMessage string `json:"error message"`
 }
 
-func HandleIndex(ctx *gofr.Context) (interface{}, error) {
+type IndexHandler struct {
+	dataService IndexService
+}
 
-	indexParam := ctx.Request.PathParam("index")
+func NewIndexHandler(dataService IndexService) *IndexHandler {
+	return &IndexHandler{dataService: dataService}
+}
 
-	if strings.Trim(indexParam, " ") == "" {
-		return nil, http.ErrorMissingParam{Params: []string{"index"}}
-	}
+func (h *IndexHandler) HandleGet(ctx *gofr.Context) (interface{}, error) {
 
-	index, err := strconv.ParseInt(indexParam, 10, 64)
+	value, err := strconv.ParseUint(ctx.PathParam(valuePathParamName), 10, 64)
 
 	if err != nil {
-		return nil, http.ErrorInvalidParam{Params: []string{"index"}}
+		return nil, http.ErrorInvalidParam{Params: []string{valuePathParamName}}
+	}
+
+	index, actualValue, found := h.dataService.SearchIndex(value)
+
+	if !found {
+		return IndexNotFoundResponse{
+			Index:        -1,
+			Value:        value,
+			ErrorMessage: "Value not found",
+		}, nil
 	}
 
 	return IndexResponse{
-		Index:        index,
-		Value:        -1,
-		ErrorMessage: "Not Implemented yet",
+		Index: index,
+		Value: actualValue,
 	}, nil
 }
