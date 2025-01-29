@@ -140,13 +140,13 @@ The Server is structured on the *three tier* architecture for better modularity 
 
 ### Presentation Tier
 
-The presentation tier is represented by [`IndexHandler`](https://github.com/fmoura/index-server/blob/39af9bcf1e0898a9ae09edc9ea1e36d5e252bb58/internal/handlers/index.go) at `handlers` package. It is responsible for handling the HTTP requests and calling the `IndexService` to fulfill the request, and give well formatted *json* responses
+The presentation tier is represented by [`IndexHandler`](internal/handler/index.go) at `handlers` package. It is responsible for handling the HTTP requests and calling the `IndexService` to fulfill the request, and give well formatted *json* responses
 
 ### Business Logic Tier
 
-The business logic tier is represented by the [`IndexService`](https://github.com/fmoura/index-server/blob/39af9bcf1e0898a9ae09edc9ea1e36d5e252bb58/internal/service/index.go) at the `service` package. It do the actual index search
+The business logic tier is represented by the [`IndexService`](internal/service/index.go) at the `service` package. It do the actual index search
 
 
 ### Data Tier
 
-The data tier is represented by the [`TextDataProvider`](https://github.com/fmoura/index-server/blob/39af9bcf1e0898a9ae09edc9ea1e36d5e252bb58/internal/data/provider.go) at the `data` package. It loads the `input data`
+The data tier is represented by the [`TextDataProvider`](internal/data/provider.go) at the `data` package. It loads the `input data`
