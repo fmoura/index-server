@@ -140,7 +140,7 @@ The Server is structured on the *three tier* architecture for better modularity 
 
 ### Presentation Tier
 
-The presentation tier is represented by [`IndexHandler`](internal/handler/index.go) at `handlers` package. It is responsible for handling the HTTP requests and calling the `IndexService` to fulfill the request, and give well formatted *json* responses
+The presentation tier is represented by [`IndexHandler`](internal/handler/index.go) at `handler` package. It is responsible for handling the HTTP requests and calling the `IndexService` to fulfill the request, and give well formatted *json* responses
 
 ### Business Logic Tier
 
