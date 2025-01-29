@@ -1,4 +1,4 @@
-module github.com/fmoura/index-api
+module github.com/fmoura/index-server
 
 go 1.22.7
 

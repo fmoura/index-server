@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/fmoura/index-api/internal/data"
-	"github.com/fmoura/index-api/internal/handlers"
-	"github.com/fmoura/index-api/internal/service"
+	"github.com/fmoura/index-server/internal/data"
+	"github.com/fmoura/index-server/internal/handler"
+	"github.com/fmoura/index-server/internal/service"
 	"gofr.dev/pkg/gofr"
 )
 
