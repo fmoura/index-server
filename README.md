@@ -10,7 +10,7 @@ The project was based on the [GoFr](gofr.dev) framework. It is a good quick star
 - Swagger rendering
 - Easy Routing
 
-Note: Other libraries like Echo ( for request routing and handling), Slog for logging and Viper for configuration could have a better end result. The way GoFr structs logging and configurations are not the best.
+Note: Other libraries like [Echo](https://echo.labstack.com/) ( for request routing and handling), [Slog](https://github.com/gookit/slog) for logging and [Viper](https://github.com/spf13/viper) for configuration could have a better end result. The way GoFr structs logging and configurations are not the best.
 
 ## Features
 
@@ -116,7 +116,7 @@ curl http://localhost:8000/index/value
 ```
 
 You should receive a response with `HTTP 400` status and payload like this:
-```
+```json
 {
   "error": {
     "message": "'1' invalid parameter(s): value"
@@ -134,7 +134,7 @@ make test
 
 ## Architecture
 
-The project folder structure follows Go best practices and GoFr conventions
+The project folder structure follows Go best practices and [GoFr](gofr.dev) conventions
 
 The Server is structured on the *three tier* architecture for better modularity and separation of concerns:
 
