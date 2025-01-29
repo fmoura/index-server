@@ -30,4 +30,11 @@ test: unit-test-go ## Execute all tests
 unit-test-go: ## Execute go unit tests
 	@echo "Running go unit tests"
 	@go clean -testcache
-	@go test -p 1 $(GO_BUILD_PARAMS) $(GO_TEST_PACKAGES)
+	@go test $(GO_BUILD_PARAMS) $(GO_TEST_PACKAGES)
+
+
+# =============================================================================
+# Run
+# =============================================================================
+run:
+	@go run ./cmd/index-server
