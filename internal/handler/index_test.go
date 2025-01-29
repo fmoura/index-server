@@ -1,4 +1,4 @@
-package handlers
+package handler
 
 import (
 	"context"
@@ -130,6 +130,20 @@ func (s *IndexHandlerSuite) TestItReturnsInvalidParamError() {
 		s.request.On("PathParam",
 			"value",
 		).Return("200.0")
+
+		_, err := s.handler.HandleGet(s.gofrContext)
+
+		s.Require().NotNil(err)
+
+		s.Require().IsType(http.ErrorInvalidParam{}, err)
+	})
+
+	s.Run("WhenITReceivesNumberBiggerThanMax", func() {
+
+		s.request.Unset("PathParam")
+		s.request.On("PathParam",
+			"value",
+		).Return("1000001")
 
 		_, err := s.handler.HandleGet(s.gofrContext)
 

@@ -1,4 +1,4 @@
-package handlers
+package handler
 
 import (
 	"strconv"
@@ -10,6 +10,7 @@ import (
 const (
 	valuePathParamName = "value"
 	IndexValuePath     = "/index/{value}"
+	maxValue           = 1000000
 )
 
 type IndexService interface {
@@ -39,7 +40,7 @@ func (h *IndexHandler) HandleGet(ctx *gofr.Context) (interface{}, error) {
 
 	value, err := strconv.ParseUint(ctx.PathParam(valuePathParamName), 10, 64)
 
-	if err != nil {
+	if err != nil || value > maxValue {
 		return nil, http.ErrorInvalidParam{Params: []string{valuePathParamName}}
 	}
 

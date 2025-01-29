@@ -16,7 +16,7 @@ const (
 )
 
 func main() {
-	// initialise gofr object
+	// initialize gofr object
 	app := gofr.New()
 
 	// Create Data Service
@@ -35,8 +35,8 @@ func main() {
 	dataService := service.NewIndexService(app.Logger(), dataProvider, conformValue)
 
 	// register route index
-	indexHandler := handlers.NewIndexHandler(dataService)
-	app.GET(handlers.IndexValuePath, indexHandler.HandleGet)
+	indexHandler := handler.NewIndexHandler(dataService)
+	app.GET(handler.IndexValuePath, indexHandler.HandleGet)
 
 	// Runs the server, it will listen on the default port 8000.
 	// it can be over-ridden through configs
